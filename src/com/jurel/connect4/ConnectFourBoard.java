@@ -102,6 +102,18 @@ public class ConnectFourBoard extends JPanel implements ActionListener {
         }
     }
 
+    private boolean isFull() {
+        int i, j = 0;
+        outer: for (i = 0; i < game.length; i++) {
+            for (j = 0; j < game[i].length; j++) {
+                if (game[i][j] == 0) {
+                    break outer;
+                }
+            }
+        }
+        return i == game.length - 1 && j == game[game.length - 1].length - 1;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // check for connect four
@@ -130,6 +142,10 @@ public class ConnectFourBoard extends JPanel implements ActionListener {
                         resetGame();
                     }
                 }
+            }
+
+            if (isFull()) {
+                JOptionPane.showMessageDialog(null, "Board is Full. Start new Game.");
             }
 
             //JOptionPane.showMessageDialog(null, "x = " + e.getX() / SIZE + "; y = " + e.getY() / SIZE );
